@@ -18,6 +18,12 @@
         limitations under the License.
     -->
 
+    <parent>
+        <groupId>com.kalix</groupId>
+        <artifactId>kalix-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.boiler</groupId>
@@ -28,36 +34,49 @@
     <name>spectrum Blueprint Bundle</name>
     <description>spectrum OSGi blueprint bundle project.</description>
 
+    <properties>
+        <camel.version>2.23.0</camel.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>3.5.0</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>
-                            com.boiler*;version=${project.version}
-                        </Export-Package>
-                        <Import-Package>
-                            *
-                        </Import-Package>
-                    </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <maxmem>256M</maxmem>
-                </configuration>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>target/classes/features.xml</file>
+                                    <type>xml</type>
+                                    <classifier>features</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-sql</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
