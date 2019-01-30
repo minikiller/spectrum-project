@@ -18,10 +18,10 @@
 
 -->
 <features>
-    <repository>mvn:org.apache.camel.karaf/apache-camel/${project.version}/xml/features</repository>
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
 
     <feature name="camel-example-sql-blueprint" version="${camel.version}">
-        <feature version="${camel.version}">camel</feature>
+        <!--<feature version="${camel.version}">camel</feature>-->
         <feature version="${camel.version}">camel-blueprint</feature>
         <feature version="${camel.version}">camel-sql</feature>
         <bundle>mvn:org.apache.derby/derby/${derby-version}</bundle>
@@ -46,6 +46,8 @@
         <feature>pax-jdbc-postgresql</feature>
         <feature>pax-jdbc-config</feature>
         <feature>pax-jdbc-pool-dbcp2</feature>
+        <feature>camel-blueprint</feature>
+        <feature>camel-sql</feature>
     </feature>
 
 </features>
